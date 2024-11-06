@@ -24,16 +24,17 @@ Install the OpenCV library using `pip`:
 
 ```bash
 pip install opencv-python
-
+```
 
 ## Usage
 
+```
 python3 video_to_image.py <video_path> <frame_interval>
-
+```
 or 
-
+```
 ./video_to_image.py <video_path> <frame_interval>
-
+```
 
 ## Arguments 
 
