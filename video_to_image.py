@@ -11,8 +11,44 @@ author:
     Benedict Kipkoech
 """
 
+def get_unique_output_folder(base_folder_name):
+    """
+    Generates a unique folder name by appending a number if a folder with the same name exists.
+
+    Parameters:
+    - base_folder_name (str): The base name of the folder.
+
+    Returns:
+    - str: A unique folder name.
+    """
+    folder_name = base_folder_name
+    counter = 1
+
+    # Loop until a unique folder name is found
+    while os.path.exists(folder_name):
+        folder_name = f"{base_folder_name}({counter})"
+        counter += 1
+
+    return folder_name
+
+
 def extract_images_from_video(video_path, frame_interval, output_folder='Images'):
-    os.makedirs(output_folder, exist_ok=True)
+    """
+    Extracts every nth frame from a video file and saves it as an image.
+
+    Parameters:
+    - video_path (str): Path to the input video file.
+    - frame_interval (int): Interval at which frames are saved (e.g., 5 means every 5th frame).
+    - output_folder (str): Directory where extracted images will be saved. Defaults to 'Images'.
+
+    Returns:
+    - None
+    """
+    if not isinstance(frame_interval, int) or frame_interval <=0:
+        raise ValueError("frame_interval must be a positive integer.")
+    
+    output_folder = get_unique_output_folder(output_folder)
+    os.makedirs(output_folder)
 
     # Load the video
     cap = cv2.VideoCapture(video_path)
